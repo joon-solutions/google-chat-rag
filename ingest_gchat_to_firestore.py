@@ -4,13 +4,12 @@ import os
 import asyncio
 from typing import List, Dict, Any
 from dataclasses import dataclass
-from datetime import datetime, timezone
 from dotenv import load_dotenv
 
 # Google Cloud imports
 from google.cloud import firestore
 import vertexai
-from vertexai.generative_models import GenerativeModel, GenerationConfig
+from vertexai.generative_models import GenerativeModel
 from vertexai.language_models import TextEmbeddingModel
 from google.cloud.firestore_v1.vector import Vector
 load_dotenv()
@@ -162,7 +161,6 @@ async def process_gchat_message(message: Dict[str, Any], msg_number: int) -> Pro
     metadata = {
         "source": "google_chat",
         "timestamp": message.get('createTime'),
-        "sender": message['sender']['name'],
         "sender": message['space']['name'],
     }
     

@@ -1,5 +1,4 @@
 import os
-import sys
 import json
 import asyncio
 import requests
@@ -16,6 +15,11 @@ import vertexai
 from vertexai.generative_models import GenerativeModel, GenerationConfig
 from vertexai.language_models import TextEmbeddingModel
 from google.cloud.firestore_v1.vector import Vector
+
+import time
+import random
+from asyncio import Lock
+
 load_dotenv()
 
 # Initialize Firestore client
@@ -100,10 +104,6 @@ def chunk_text(text: str, chunk_size: int = 5000) -> List[str]:
 
     return chunks
 
-import time
-import random
-from asyncio import Semaphore, Lock
-
 # Create a rate limiter for Gemini requests
 # Default quota for Gemini 1.5 Pro is 60 requests per minute per project
 # We'll set it to 40 to be safe
@@ -148,7 +148,7 @@ async def get_title_and_summary(chunk: str, url: str) -> Dict[str, str]:
             # Record this request timestamp before making the request
             async with gemini_lock:
                 gemini_requests.append(time.time())
-                current_count = len(gemini_requests)
+                # current_count = len(gemini_requests)
             
             # Create a synchronous function to call Gemini
             def call_gemini():
