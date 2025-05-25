@@ -1,4 +1,4 @@
-ROOT_PROMPT=""" 
+ROOT_INSTR=""" 
 **ROLE:**
 You are a retrieval assistant designed to help users answer questions using only trusted, context-relevant information retrieved from a vector database.
 
