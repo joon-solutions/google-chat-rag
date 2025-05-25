@@ -9,13 +9,13 @@
             "name": "Debug ADK",
             "type": "debugpy",
             "request": "launch",
-            "module": "adk",
+            "program": "${workspaceFolder}/.venv/bin/adk",
             "console": "integratedTerminal",
-            "python": "/home/alice/miniconda3/bin/python",
             "args": [
                 "run",
                 "multi_tool_agent"
             ],
+            "justMyCode": false
         }
     ]
 }
