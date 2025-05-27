@@ -12,8 +12,7 @@
             "program": "${workspaceFolder}/.venv/bin/adk",
             "console": "integratedTerminal",
             "args": [
-                "run",
-                "multi_tool_agent"
+                "web"
             ],
             "justMyCode": false
         }
