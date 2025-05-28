@@ -16,11 +16,7 @@ collection_name = os.environ.get("VECTOR_DB_COLLECTION_NAME","")
 
 
 db = firestore.Client(project=project_id, database=database_name)
-
-vertexai.init(project=project_id, location=location)
-
 collection = db.collection(collection_name)
-
 embedding_model = VertexAIEmbeddings(model_name="text-embedding-005")
 
 gen_model = model = GenerativeModel(
