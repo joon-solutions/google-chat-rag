@@ -42,5 +42,5 @@ jobs:
           --region=${{ secrets.GCP_REGION }} \
           --service_name="$SERVICE_NAME" \
           --app_name="$APP_NAME" \
-          --with-ui \
+          --with_ui \
           "$AGENT_PATH"
