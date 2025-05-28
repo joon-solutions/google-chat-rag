@@ -1,3 +1,5 @@
+[![Deploy to Cloud Run](https://github.com/luutuankiet/google-chat-rag/actions/workflows/CD.yml/badge.svg)](https://github.com/luutuankiet/google-chat-rag/actions/workflows/CD.yml)
+
 # quickstart
 
 
