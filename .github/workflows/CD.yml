@@ -1,8 +1,10 @@
 name: Deploy to Cloud Run
 
 on:
-  push:
-    branches: [main]  # PR merges to main trigger CD
+  pull_request:
+    branches: [main]
+    types: closed
+
   workflow_dispatch:
 
 jobs:
@@ -21,36 +23,24 @@ jobs:
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v2'
 
-    - name: 'Use gcloud CLI'
-      run: 'gcloud info'
+    - name: 'Set up Python'
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+  
+    - name: 'Install google-adk'
+      run: pip install google-adk
 
-    - name: Verify Authentication
-      run: gcloud auth list
-
-    - name: Verify Project Access
-      run: gcloud config list
-
-    - name: List Cloud Run Services
+    - name: Deploy adk
+      env:
+        SERVICE_NAME: 'demo-rag-agent'
+        APP_NAME: 'multi_tool_agent'
+        AGENT_PATH: './multi_tool_agent'
       run: |
-        gcloud run services list \
-          --platform=managed \
-          --region=${{ secrets.GCP_REGION }}
-
-    # - name: Authenticate Docker to GCR
-    #   run: |
-    #     gcloud auth configure-docker
-
-    # - name: Build and Push Docker image
-    #   run: |
-    #     IMAGE="gcr.io/${{ secrets.GCP_PROJECT }}/my-app:${{ github.sha }}"
-    #     docker build -t $IMAGE .
-    #     docker push $IMAGE
-
-    # - name: Deploy to Cloud Run
-    #   run: |
-    #     gcloud run deploy my-app \
-    #       --image=gcr.io/${{ secrets.GCP_PROJECT }}/my-app:${{ github.sha }} \
-    #       --region=${{ secrets.GCP_REGION }} \
-    #       --platform=managed \
-    #       --allow-unauthenticated \
-    #       --service-account=github-cd@${{ secrets.GCP_PROJECT }}.iam.gserviceaccount.com
+        adk deploy cloud_run \
+          --project=${{ secrets.GCP_PROJECT }} \
+          --region=${{ secrets.GCP_REGION }} \
+          --service_name="$SERVICE_NAME" \
+          --app_name="$APP_NAME" \
+          --with-ui \
+          "$AGENT_PATH"
