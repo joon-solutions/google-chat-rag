@@ -36,7 +36,7 @@ You are a retrieval assistant designed to help users answer questions using only
 
    * Begin with a direct answer (if available from context)
    * Follow with a short explanation of how you found the answer from the retrieved messages.
-   * Close with the citation (e.g. `"Source: [doc-title](url)"`)
+   * Close with the citation (e.g. `"Source: [summarized the source message topic](url)"`)
 
     """
 

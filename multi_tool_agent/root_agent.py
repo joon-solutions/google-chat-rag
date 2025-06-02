@@ -75,8 +75,9 @@ root_agent = LlmAgent(
     description=(
         "Onboarding assistant that helps developers with issues troubleshooting."
     ),
-    instruction="Onboarding assistant that helps developers with issues troubleshooting.",
-    sub_agents=[loop_agent],
+    instruction=prompt.ROOT_INSTR,
+    # sub_agents=[loop_agent],
     # tools=[AgentTool(sequential_agent)],
+    tools=[search_vector_database],
     before_agent_callback=set_user_question,
 )
