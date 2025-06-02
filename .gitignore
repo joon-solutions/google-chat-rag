@@ -5,3 +5,7 @@ credentials.json
 __pycache__
 /adk-samples/
 .env
+/agent-starter-pack/
+/samples/
+/demo-looker-agent/
+/.adk/
