@@ -3,7 +3,7 @@ name = "gchat-ingestion"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "dotenv>=0.9.9",
     "email-validator>=2.2.0",
@@ -15,6 +15,7 @@ dependencies = [
     "google-cloud-aiplatform[adk,agent-engines]>=1.93.0",
     "google-cloud-firestore",
     "langchain-google-vertexai>=2.0.23",
+    "minimal-csv-diff",
     "vertexai",
 ]
 
@@ -22,3 +23,6 @@ dependencies = [
 dev = [
     "uv-bump>=0.1.2",
 ]
+
+[tool.uv.sources]
+minimal-csv-diff = { git = "https://github.com/joon-solutions/minimal-csv-diff.git", rev = "feat/add_cli" }
